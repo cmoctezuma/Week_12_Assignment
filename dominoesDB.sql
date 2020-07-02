@@ -45,4 +45,5 @@ primary key (id),
 foreign key (customer_order_id) references customerOrder(id)
 );
 
-show tables;
+select * from items
+;
