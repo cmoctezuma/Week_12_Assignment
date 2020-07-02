@@ -30,18 +30,20 @@
 			String customer_name = " ";
 			String address = " ";
 			String phone_number = " ";
+			String description = " ";
 			int customer_id = 0;
 			int quantity = 0;
 			int id = 0;
 			int restaurant_id = 0;
+			Double price = 0.00;
 			
 			do {
 				order = sc.nextLine();
 				
 				if (order.equals("1")) {
-					System.out.println("Welcome Back! Enter customer_id");
-					customer_id = sc.nextInt();
-					main.();	
+					System.out.println("Welcome Back! Enter name");
+					customer_name = sc.nextLine();
+					main.getCustomerId(customer_name);
 				}else if (order.equals("2")) {
 					System.out.println("Enter name");
 					customer_name = sc.nextLine();
@@ -49,39 +51,38 @@
 				    address = sc.nextLine();
 					System.out.println("Enter phone number");
 					phone_number = sc.nextLine();
-					main.update();	
+					main.createProfile(customer_name, address, phone_number);	
 				}else if (order.equals("3")) {
 					System.out.println("Enter id of restaurant location");
 					restaurant_id = sc.nextInt();
-					main.update();
-				}else if (order.equals("4")) {
-					main.view();		
+					main.getRestaurantId(id);
+				}else if (order.equals("4")) { 
+					System.out.println("Here is the list of items");
+					main.showMenu();		
 				}else if (order.equals("5")){
 					System.out.println("What would you like to order?");
 					item = sc.nextLine();
 					System.out.println("How much would you like to order?");
 					quantity = sc.nextInt();
-					main.add();	
+					main.addItem(item, quantity);	
 				}else if (order.equals("6")) {
 					System.out.println("Enter id for item you would like to update");
 					id = sc.nextInt();
 					System.out.println("How many would you like to order?");
 					quantity = sc.nextInt();
-					main.update();	
+					//main.updateQuantity();	
 				} else if (order.equals("7")) {
 					System.out.println(" Enter id for item you would like to delete");
 					id = sc.nextInt();
-					main.delete();
+					main.removeItem(id);
 				}else if (order.equals("8")) {
 					System.out.println(" Your order is complete, please expect 20 mins for delivery");
 					break;
 				} else {
-					main.();
+					//main.();
 				}	
 				
 			} while (order.equals("-1"));
 		}
-
-	}
 
 }
