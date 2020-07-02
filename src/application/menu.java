@@ -66,20 +66,21 @@
 					quantity = sc.nextInt();
 					main.addItem(item, quantity);	
 				}else if (order.equals("6")) {
-					System.out.println("Enter id for item you would like to update");
-					id = sc.nextInt();
+					System.out.println("Enter item you would like to update");
+					item = sc.nextLine();
 					System.out.println("How many would you like to order?");
 					quantity = sc.nextInt();
-					//main.updateQuantity();	
+					main.updateQuantity(item, quantity);	
 				} else if (order.equals("7")) {
 					System.out.println(" Enter id for item you would like to delete");
 					id = sc.nextInt();
 					main.removeItem(id);
 				}else if (order.equals("8")) {
 					System.out.println(" Your order is complete, please expect 20 mins for delivery");
+					
 					break;
 				} else {
-					//main.();
+					main.invalidSelection();
 				}	
 				
 			} while (order.equals("-1"));

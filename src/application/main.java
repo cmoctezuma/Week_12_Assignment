@@ -28,7 +28,7 @@ package application;
 			System.out.println("\n");
 			System.out.println("Welcome!");
 
-			// method to show Menu;
+			menu.showOptions();
 		}
 
 		public static void createProfile(String customer_name, String address, String phone_number) {
@@ -62,10 +62,13 @@ package application;
 			final String getCustomerIdQuery = "Select id FROM customer WHERE customer_name = ?";
 
 			try {
-				Statement statement = conn.createStatement();
-				ResultSet rs = statement.executeQuery(getCustomerIdQuery);
+				PreparedStatement statement = conn.prepareStatement(getCustomerIdQuery);
+				statement.setString(1, customer_name);
+				ResultSet rs = statement.executeQuery();
 
-				System.out.println(rs.getInt("id"));
+				while (rs.next()) {
+					System.out.println(rs.getInt("id"));
+				}
 
 			} catch (SQLException e) {
 				System.out.println("Error in getCustomerId query");
@@ -82,7 +85,8 @@ package application;
 
 			try {
 				Statement statement = conn.createStatement();
-				ResultSet rs = statement.executeQuery(getRestaurantIdQuery);
+		
+			ResultSet rs = statement.executeQuery(getRestaurantIdQuery);
 
 				System.out.println(rs.getInt("id"));
 
@@ -152,6 +156,29 @@ package application;
 			}
 		}
 		
+		
+		public static void updateQuantity(String item, int quantity) {
+			final String updateQuantityQuery = "UPDATE items set quanitiy = ? WHERE id = ?";
+
+			try {
+				PreparedStatement ps = conn.prepareStatement(updateQuantityQuery);
+				ps.setString(1, item);
+				ps.setInt(2, quantity);
+
+				ps.executeUpdate();
+
+				System.out.println(quantity + " " + item + "('s) updated successfully!");
+
+			} catch (SQLException e) {
+				System.out.println("Error in update query");
+				e.printStackTrace();
+			}
+		}
+		
+		public static void invalidSelection() {
+			System.out.println("Not a valid choice. Please try again");
+			menu.showOptions();
+		}
 	
 	}
 
